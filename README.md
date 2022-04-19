@@ -9,4 +9,19 @@ SANITY_STUDIO_VIMEO_ACCESS_TOKEN='xxx'
 SANITY_STUDIO_VIMEO_FOLDER_ID='xxx' // Optional
 ```
 
-You will see a button at the top of the dashboard (which I would prefer be somewhere else!) which will fetch videos from the Vimeo REST API and insert them into the site.
+You will see a button at the top of the dashboard which will fetch videos from the Vimeo REST API and insert them into the site.
+
+Then reference it in schemas :
+
+```
+{
+  title: 'Video',
+  name: 'video',
+  type: 'reference',
+  to: [
+    {
+      type: 'vimeo',
+    },
+  ],
+}
+```
