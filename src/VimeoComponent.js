@@ -1,5 +1,7 @@
 import client from 'part:@sanity/base/client';
 import React, { useState } from 'react';
+import { FaSync } from 'react-icons/fa';
+import { Button } from '@sanity/ui';
 import { addKeys } from './helpers';
 import styles from './VimeoComponent.css';
 
@@ -104,13 +106,15 @@ const VimeoComponent = () => {
     <div className={styles.container}>
       {vimeoAccessToken && (
         <>
-          <button
+          <Button
+            fontSize={[2, 2, 3]}
+            icon={FaSync}
+            mode="primary"
+            padding={[3, 3, 4]}
+            text="Load Vimeo videos"
             style={{ marginBottom: '1rem' }}
-            type="button"
             onClick={() => fetchVimeo()}
-          >
-            Load Vimeo videos
-          </button>
+          />
 
           {count && countPages && (
             <p>
