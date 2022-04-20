@@ -108,10 +108,10 @@ const VimeoComponent = () => {
         <>
           <Button
             fontSize={[2, 2, 3]}
-            icon={FaSync}
+            icon={!doingPage || doingPage === 'Finished' ? FaSync : null}
             mode="primary"
-            padding={[3, 3, 4]}
-            text="Load Vimeo videos"
+            padding={[5, 5, 5]}
+            text={!doingPage || doingPage === 'Finished' ? "Load Vimeo videos" : doingPage}
             style={{ marginBottom: '1rem' }}
             onClick={() => fetchVimeo()}
           />
@@ -124,7 +124,7 @@ const VimeoComponent = () => {
             </p>
           )}
 
-          {doingPage && <p>{doingPage}</p>}
+          {doingPage && doingPage === 'Finished' && <p>{doingPage}</p>}
         </>
       )}
 
