@@ -19,6 +19,7 @@ const VimeoComponent = () => {
   function importVimeo(url) {
 
     let nextPage;
+    let canFetch;
 
     fetch(`https://api.vimeo.com${url}`, {
       headers: {
@@ -48,17 +49,23 @@ const VimeoComponent = () => {
             };
             transaction.createOrReplace(videoObject);
             videos.push(videoObject);
+          } else {
+            canFetch = false
+            setDoingPage(`This token doesn’t have the "files" scope or this account is not a PRO account`)
+            console.warn(`This token doesn’t have the "files" scope or this account is not a PRO account`)
           }
         });
 
-        return transaction
-          .commit()
-          .then((response) =>
-            nextPage ? importVimeo(nextPage) : (setDoingPage(`Finished`), deleteIncompatibleVimeoDocuments(videos)),
-          )
-          .catch((error) => {
-            console.error('Update failed: ', error.message);
-          });
+        if (canFetch !== false) {
+          return transaction
+            .commit()
+            .then((response) =>
+              nextPage ? importVimeo(nextPage) : (setDoingPage(`Finished`), deleteIncompatibleVimeoDocuments(videos)),
+            )
+            .catch((error) => {
+              console.error('Update failed: ', error.message);
+            });
+        }
       });
   }
 
