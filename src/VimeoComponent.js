@@ -19,7 +19,7 @@ const VimeoComponent = () => {
   function importVimeo(url) {
 
     let nextPage;
-    let canFetch;
+    let canFetchFiles;
 
     fetch(`https://api.vimeo.com${url}`, {
       headers: {
@@ -50,13 +50,13 @@ const VimeoComponent = () => {
             transaction.createOrReplace(videoObject);
             videos.push(videoObject);
           } else {
-            canFetch = false
+            canFetchFiles = false
             setDoingPage(`This token doesn’t have the "files" scope or this account is not a PRO account`)
             console.warn(`This token doesn’t have the "files" scope or this account is not a PRO account`)
           }
         });
 
-        if (canFetch !== false) {
+        if (canFetchFiles !== false) {
           return transaction
             .commit()
             .then((response) =>
